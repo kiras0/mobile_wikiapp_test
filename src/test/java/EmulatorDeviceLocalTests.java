@@ -2,6 +2,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.appium.java_client.AppiumBy;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 
@@ -15,16 +16,15 @@ import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.openqa.selenium.By.className;
 
-public class WikiTest extends TestBase{
+@Tag("emulator")
+@DisplayName("Testing Wiki App functionality on local Android device.")
+public class EmulatorDeviceLocalTests extends TestBase{
     final SelenideElement
-
-            continueButton = $(AppiumBy.id("org.wikipedia.alpha:id/fragment_onboarding_forward_button")),
             moreOptionsButton = $(accessibilityId("More options")),
             returnButton = $(accessibilityId("Navigate up")),
+            continueButton = $(AppiumBy.id("org.wikipedia.alpha:id/fragment_onboarding_forward_button")),
             toolbarLogo = $(AppiumBy.id("org.wikipedia.alpha:id/main_toolbar_wordmark")),
-            searchContainer = $(AppiumBy.id("org.wikipedia.alpha:id/search_src_text")),
             emptyContainer = $(AppiumBy.id("org.wikipedia.alpha:id/empty_container"));
-
     @DisplayName("Testing introduction pages for new user first launch.")
     @Test
     void introductionFirstLoadTest() {
@@ -79,16 +79,9 @@ public class WikiTest extends TestBase{
                    .shouldHave(text("Customize the feed"));
             step("Press More options menu button", () ->
                 moreOptionsButton.click());
-            step("Select 'Hide all' option", () -> {
-                List<WebElement> buttons = new ArrayList<>($$(className("android.widget.TextView")));
-                for(WebElement button : buttons){
-                    System.out.println(button.getText());
-                    if(button.getText().equals("Hide all")){
-                        button.click();
-                        break;
-                    }
-                }
-            });
+            step("Select 'Hide all' option", () ->
+                    $(AppiumBy.xpath("//android.widget.TextView[@resource-id=\"org.wikipedia.alpha:id/title\" and @text=\"Hide all\"]"))
+                    .click());
             step("Pressing Back, to exit Customization Feed page", Selenide::back);
         });
         step("Checking that the main feed is empty", () -> {
@@ -103,13 +96,14 @@ public class WikiTest extends TestBase{
     void searchFunctionalityTest() {
         step("Pressing Back, to exit introduction page", Selenide::back
         );
-        step("Confirming main page load, pressing on search bar", () -> {
+        step("Confirming main page load, pressing on search tab", () -> {
             toolbarLogo.shouldBe(enabled);
             $(AppiumBy.id("org.wikipedia.alpha:id/nav_tab_search")).click();
         });
-        step("Searching for 'Appium'", () ->
-                searchContainer.sendKeys("Appium")
-        );
+        step("Opening search and searching for 'Appium'", () -> {
+            $(AppiumBy.id("org.wikipedia.alpha:id/search_card")).click();
+            $(AppiumBy.id("org.wikipedia.alpha:id/search_src_text")).sendKeys("Appium");
+        });
         step("Asserting search result is not empty", () -> {
             List<WebElement> result = new ArrayList<>($(AppiumBy.id("org.wikipedia.alpha:id/search_results_list")).$$(className("android.widget.TextView")));
             for(WebElement list : result){
@@ -128,7 +122,8 @@ public class WikiTest extends TestBase{
             $(AppiumBy.id("org.wikipedia.alpha:id/search_container")).click();
         });
         step("Searching for 'Appium'", () ->
-            searchContainer.sendKeys("Appium")
+            $(AppiumBy.id("org.wikipedia.alpha:id/search_src_text"))
+                        .sendKeys("Appium")
         );
         step("Pressing on first result", () ->
             $(AppiumBy.id("org.wikipedia.alpha:id/search_results_list")).$(AppiumBy.className("android.widget.TextView")).click()
@@ -159,12 +154,10 @@ public class WikiTest extends TestBase{
             $(AppiumBy.id("org.wikipedia.alpha:id/page_save"))
                     .click();
         String title = $(AppiumBy.className("android.widget.TextView")).getText();
-            System.out.println(title);
             returnButton.click();
             return title;
          });
         step("Opening 'Save' page and opening collection", () -> {
-
             $(AppiumBy.id("org.wikipedia.alpha:id/nav_tab_reading_lists"))
                     .click();
             $(AppiumBy.id("org.wikipedia.alpha:id/item_title"))
@@ -173,11 +166,8 @@ public class WikiTest extends TestBase{
                     .click();
         });
         step("Asserting that correct article is saved", () -> {
-            String sevedArticleTitle= $(AppiumBy.id("org.wikipedia.alpha:id/page_list_item_title")).getText();
-            System.out.println(sevedArticleTitle);
-            assertThat(articleTitle).isEqualTo(sevedArticleTitle);
+            String collectionArticleTitle= $(AppiumBy.id("org.wikipedia.alpha:id/page_list_item_title")).getText();
+            assertThat(articleTitle).isEqualTo(collectionArticleTitle);
         });
     }
-
-
 }

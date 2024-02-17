@@ -64,3 +64,15 @@ tasks.withType(Test) {
         }
     }
 }
+
+task browserstack_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("browserstack")
+    }
+}
+
+task local_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("emulator")
+    }
+}

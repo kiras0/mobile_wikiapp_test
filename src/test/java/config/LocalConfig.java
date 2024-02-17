@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "classpath:localMobile.properties"
 })
-public interface LocalMobileConfig extends Config {
+public interface LocalConfig extends Config {
     @Key("device")
     String getDevice();
 
