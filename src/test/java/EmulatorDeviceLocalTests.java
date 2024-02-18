@@ -1,6 +1,7 @@
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.appium.java_client.AppiumBy;
+import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.openqa.selenium.By.className;
 
+@Owner("Kiras0")
 @Tag("emulator")
 @DisplayName("Testing Wiki App functionality on local Android device.")
 public class EmulatorDeviceLocalTests extends TestBase{
