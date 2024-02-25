@@ -130,8 +130,8 @@ public class EmulatorDeviceLocalTests extends TestBase{
         step("Pressing on first result", () ->
             $(AppiumBy.id("org.wikipedia.alpha:id/search_results_list")).$(AppiumBy.className("android.widget.TextView")).click()
         );
-        step("Confirming 'Customize your tool bar' pop up", () ->
-            $(AppiumBy.id("android:id/navigationBarBackground")).click()
+        step("Closing 'Customize your tool bar' pop up", () ->
+            $(AppiumBy.id("org.wikipedia.alpha:id/action_bar_root")).click()
         );
         step("Checking successful search result", () -> {
             $(AppiumBy.className("android.widget.TextView"))
