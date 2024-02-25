@@ -24,5 +24,4 @@ public interface BrowserStackConfig extends Config{
    String getName();
    @Key("remoteUrl")
    String getUrl();
-
 }
