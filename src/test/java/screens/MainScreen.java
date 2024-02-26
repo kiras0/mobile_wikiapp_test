@@ -14,7 +14,7 @@ public class MainScreen {
             customizePromptBtn = $(AppiumBy.id("org.wikipedia.alpha:id/view_announcement_action_positive")),
             closePromptBtn = $(AppiumBy.id("org.wikipedia.alpha:id/view_announcement_action_negative")),
             emptyContainer = $(AppiumBy.id("org.wikipedia.alpha:id/empty_container")),
-            emptyDescription = emptyContainer.$(AppiumBy.className("android.widget.TextView")),
+            emptyText = emptyContainer.$(AppiumBy.className("android.widget.TextView")),
             articleTitle = $(AppiumBy.id("org.wikipedia.alpha:id/articleTitle")),
             saveBtn =  $(AppiumBy.id("org.wikipedia.alpha:id/nav_tab_reading_lists")),
             searchContainer =  $(AppiumBy.id("org.wikipedia.alpha:id/search_container")),
@@ -39,7 +39,7 @@ public class MainScreen {
     @Step("Checking that the main feed is empty")
     public MainScreen emptyMain() {
         emptyContainer.shouldBe(enabled);
-        emptyDescription.shouldHave(text("There's nothing on your Explore feed"));
+        emptyText.shouldHave(text("There's nothing on your Explore feed"));
         return this;
     }
     @Step("Opening Featured Article")
