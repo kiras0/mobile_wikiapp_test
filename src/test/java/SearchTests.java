@@ -32,6 +32,6 @@ public class SearchTests extends TestBase{
                 .searchFor(testData.setSearchRequest)
                 .firstResult();
         articleScreen.customizePopUp()
-                .checkTitle(testData.setMainRequest);
+                .checkTitle(testData.setSearchRequest);
     }
 }
