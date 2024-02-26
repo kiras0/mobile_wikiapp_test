@@ -9,6 +9,6 @@ import org.aeonbits.owner.Config;
     public interface TestDataConfig extends Config {
         @Key("searchRequest")
         String getSearchRequest();
-    @Key("mainScreenSearch")
-    String getMainScreenSearch();
+        @Key("mainScreenSearch")
+        String getMainScreenSearch();
 }
