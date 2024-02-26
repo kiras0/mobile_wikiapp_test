@@ -1,5 +1,5 @@
 
-# <p align="center">Automated tests for Wikipedia App</p>
+# <p align="center">Mobile automation project for Wikipedia App</p>
 
 <p align="center" ><a href="https://www.visitacity.com">
 <img width=60% title="VISITACITY" src="media/images/wikipedia-logo.png">
