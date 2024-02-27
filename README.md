@@ -209,7 +209,7 @@ You can change the following parameters in the test:
 
 ---
 
-## <img width="4%" title="Jira" src="media/images/jira-logo.svg"> Jira Integration
+## <img width="3%" title="Jira" src="media/images/jira-logo.svg"> Jira Integration
 
 <p align="center">
 <img src="media/images/jira_autotests_cloud.png" alt="Telegram Notification" width="80%">
