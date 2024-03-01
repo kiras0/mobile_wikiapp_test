@@ -8,17 +8,10 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import screens.*;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestBase {
-    ArticleScreen articleScreen = new ArticleScreen();
-    IntroductionScreen introductionScreen = new IntroductionScreen();
-    MainScreen mainScreen = new MainScreen();
-    SaveScreen saveScreen = new SaveScreen();
-    SearchScreen searchScreen = new SearchScreen();
-    FeedCustomizationScreen feedCustomizationScreen = new FeedCustomizationScreen();
     TestData testData = new TestData();
     public static String deviceHost = System.getProperty("deviceHost");
     @BeforeAll
